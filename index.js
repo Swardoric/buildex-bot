@@ -3,8 +3,16 @@ const client = new Discord.Client(); //Que votre Bot est un nouvel utilisateur
 var prefix = "*"; //Prefix de votre Bot ( *play www.youtube.com/ )
 client.login("NjEzODA5OTI3MzU3NTk1Njgw.XV2XrA.gGOVe7VP6BKdHAh1n-kPzpnUAzE"); //Token (Série de chiffre) propre a chaque Bot
 client.on("ready", () => { //Signifie que le bot à bien démarré 
-console.log("Je suis prêt !"); //Lorsque que le bot est lancé observer la console Visual Studio 
-//client.user.setGame("s'Update seul"); //Voir le Jeu sur le Discord
+  console.log("Je suis prêt !"); //Lorsque que le bot est lancé observer la console Visual Studio 
+  let sts = [
+    `Regarde ${client.guilds.get("483739009324023827").memberCount}`,
+    `Prefix : *`,
+    `Besoin d'information : *info`
+  ]; //Phrases qui vont apparaître sur son Activity
+  setInterval(function() {
+    let sta = sts[Math.floor(Math.random() * sts.length)]; //Prend une phrase au hasard de let sts
+    client.user.setActivity(sta, { type: "WATCHING" }); //Met le status du bot (PLAYING, LISTENING, WATCHING, STREAMING)
+  }, 20000); //Temps qui passe pour changer la phrase (10000 millisecondes = 10 secondes / 20000 millisecondes = 20 secondes / etc...)
 });
 
 /* client.on('message', (receivedMessage) => {
