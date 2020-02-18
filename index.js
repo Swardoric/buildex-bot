@@ -1,10 +1,11 @@
 const Discord = require('discord.js'); //Ce que le bot à besoin /
 const client = new Discord.Client(); //Que votre Bot est un nouvel utilisateur
-var prefix = "*"; //Prefix de votre Bot ( *play www.youtube.com/ )
-client.login("NjEzODA5OTI3MzU3NTk1Njgw.XV2XrA.gGOVe7VP6BKdHAh1n-kPzpnUAzE"); //Token (Série de chiffre) propre a chaque Bot
+const config = require('./config.json')
+var prefix = config.prefix; //Prefix de votre Bot ( *play www.youtube.com/ )
+client.login(config.token); //Token (Série de chiffre) propre a chaque Bot
 client.on("ready", () => { //Signifie que le bot à bien démarré 
-console.log("Je suis prêt !"); //Lorsque que le bot est lancé observer la console Visual Studio 
-//client.user.setGame("s'Update seul"); //Voir le Jeu sur le Discord
+  console.log("Je suis prêt !"); //Lorsque que le bot est lancé observer la console Visual Studio 
+  //client.user.setGame("s'Update seul"); //Voir le Jeu sur le Discord
 });
 
 /* client.on('message', (receivedMessage) => {
@@ -17,6 +18,13 @@ console.log("Je suis prêt !"); //Lorsque que le bot est lancé observer la cons
 }) */
 
 client.on("message", (message) => {
+
+  config.ChannelReactId.forEach(id => {//Boucle qui parcours tout les id
+    if(message.channel.id == id){//Si l'id est correcte alors on rajoute les reactions 
+      message.react('👍');message.react('👎');
+    }
+  });
+
     // Exit and stop if it's not there
     if (!message.content.startsWith(prefix)) return;
 
